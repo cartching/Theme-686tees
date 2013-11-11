@@ -1,0 +1,105 @@
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="content_area" -->
+
+	<!-- Body -->
+	
+	<div class="row">
+		
+		<div class="span12">
+		
+			<h1>Your Cart</h1>
+		
+		</div>
+		
+	</div>
+
+	<!-- Basket -->
+	
+	<div class="row">
+	
+		<div class="span12">
+			<form action="/cart/update" method="post">
+				<table class="basket-table">
+					<thead>
+						<tr>
+							<th colspan="2">Item</th>
+							<th>Qty</th>
+							<th>Price</th>
+							<th colspan="2">Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- #FOREACH {{cartitem in cart.items}} -->
+						<tr>
+							<td class="image">
+								<a href="product.html">
+									<img src="{{cartitem.image}}?w=80&h=80&crop=true" alt="{{cartitem.name | html_encode}}" />
+								</a>
+							</td>
+							<td class="title"><a href="{{cartitem.url}}">
+								{{cartitem.name | html_encode}}
+								<!-- #IF {{cartitem.hasvariation}} -->
+	                            <br />{{cartitem.variation.name | html_encode}}
+	                            <!-- #ENDIF --></a></td>
+							<td class="qty">
+								<input type="number" size="4" name="quantity" value="{{cartitem.quantity}}" />
+	                            <input type="hidden" name="cartitem" value="{{cartitem.id}}" />
+							</td>
+							<td class="price">{{cartitem.price | money}}</td>
+							<td class="total">{{cartitem.qtyprice | money}}</td>
+							<td class="remove">
+								<a href="#" data-id="{{cartitem.id}}" title="Remove - {{cartitem.name | html_encode}}"><span class="entypo trash"></span></a>
+							</td>
+						</tr>
+						<!-- #NEXT -->
+					</tbody>
+				</table>
+
+				<div class="clearfix">
+				
+				<p class="basket-total"><span>Total:</span> {{cart.totalprice | money}}</p>
+				
+				</div>
+				
+				<p class="actions">
+					<a class="btn btn-blank" href="/shop">Continue Shopping</a>
+					<button class="btn btn-blank">Update Cart</button>
+					<a class="btn btn-primary" href="/checkout">Continue to Checkout</a>
+				</p>
+
+			</form>
+			
+		</div>
+	
+	</div>
+	
+	<!-- Related Products -->
+	
+	<div class="row">
+		
+		<div class="span12">
+		
+			<h2>You May Also Like...</h2>
+		
+		</div>
+		
+	</div>
+
+	<!-- Product Listing -->
+	
+	<div class="row">
+		<!-- #FOREACH {{ product in products.featured | shuffle | pick(3) }} -->
+		<div class="span4 product-listing">
+			<p class="title"><a href="{{product.url}}">{{product.name | html_encode}}</a></p>
+			<a href="{{product.url}}"><img class="image" src="{{product.image}}?w=372&h=291&crop=true" alt="{{product.name | html_encode}}" /></a>
+			<p class="price">
+				{{product.price | money }}
+				<!-- <a class="btn btn-addcart btn-primary" href="basket.html"><span class="entypo cart"></span></a> -->
+				<a class="btn btn-view btn-grey" href="{{product.url}}"><span class="entypo search"></span></a>
+			</p>
+		</div>
+		<!-- #NEXT -->
+	</div>
+
+<!-- #ENDBLOCK -->

@@ -1,0 +1,27 @@
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="content_area" -->
+
+  <!-- Body -->
+  <div class="row">
+    <div class="span12">
+      <h1>Featured Products</h1>
+    </div>
+  </div>
+
+  <!-- Product Listing -->
+  <div class="row">
+    <!-- #FOREACH {{ product in products.featured | shuffle | pick(9) }} -->
+    <div class="span4 product-listing">
+      <p class="title"><a href="{{product.url}}">{{product.name | html_encode}}</a></p>
+      <a href="{{product.url}}"><img class="image" src="{{product.image}}?w=372&h=291&crop=true" alt="{{product.name | html_encode}}" /></a>
+      <p class="price">
+        {{product.price | money}}
+        <a class="btn btn-addcart btn-primary" href="basket.html"><span class="entypo cart"></span></a>
+        <a class="btn btn-view btn-grey" href="{{product.url}}"><span class="entypo search"></span></a>
+      </p>
+    </div>
+    <!-- #NEXT -->
+  </div>
+
+<!-- #ENDBLOCK -->

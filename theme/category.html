@@ -1,0 +1,54 @@
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="content_area" -->
+
+	<!-- Body -->
+	<div class="row">
+		<div class="span12">
+			<h1>{{category.name | html_encode}}</h1>
+		</div>
+	</div>
+
+
+	<!-- Product Listing -->
+	<!-- #var {{ pagedProducts = category.products | paged(6) }} -->
+	<div class="row">
+		
+	    <!-- #FOREACH {{ product in pagedProducts }} -->
+	    <div class="span4 product-listing">
+	      <p class="title"><a href="{{product.url}}">{{product.name | html_encode}}</a></p>
+	      <a href="{{product.url}}"><img class="image" src="{{product.image}}?w=372&h=291&crop=true" alt="{{product.name | html_encode}}" /></a>
+	      <p class="price">
+	        {{product.price | money}}
+	        <a class="btn btn-addcart btn-primary" href="basket.html"><span class="entypo cart"></span></a>
+	        <a class="btn btn-view btn-grey" href="{{product.url}}"><span class="entypo search"></span></a>
+	      </p>
+	    </div>
+	    <!-- #NEXT -->
+		
+	</div>
+	
+	<!-- #IF {{pagedproducts.pages}} -->
+	<div class="row">
+	
+		<div class="span12">
+			
+			<div class="pagination">
+				{{ pagedProducts | pager }}
+			  <!-- <ul>
+			    <li><a href="#">Prev</a></li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">5</a></li>
+			    <li><a href="#">Next</a></li>
+			  </ul> -->
+			</div>
+		
+		</div>
+	
+	</div>
+	<!-- #ENDIF -->
+
+<!-- #ENDBLOCK -->

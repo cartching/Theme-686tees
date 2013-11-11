@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+    <!-- #BLOCK name="page_title" --><title>{{page.title | html_encode}} | {{store | html_encode}}</title><!-- #ENDBLOCK -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="UTF-8" />
+    <!-- #BLOCK name="page_keywords" --><!-- #IF {{page.keywords}} --><meta name="keywords" content="{{page.keywords | html_encode}}" /><!-- #ENDIF --><!-- #ENDBLOCK -->
+
+    <!-- #BLOCK name="page_description" -->
+    <!-- #IF {{page.description}} -->
+    <!-- #var {{ pagedescription = page.description | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+    <!-- #ENDIF -->
+    <!-- #ENDBLOCK -->
+    <meta property="og:site_name" content="{{store | html_encode}}" />
+    <meta property="og:url" content="{{page.url}}" />
+    <meta property="og:title" content="{{page.title | html_encode}}" />
+    <!-- #BLOCK name="page_type" --><meta property="og:type" content="website" /><!-- #ENDBLOCK -->
+    <!-- #BLOCK name="page_image" --><!-- #ENDBLOCK -->
+		
+		<!-- Bootstrap -->
+    <link href="/files/bootstrap.min.css" rel="stylesheet" media="screen" />
+		
+		<!-- Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet" type="text/css" />
+    <link href="/files/entypo.css" rel="stylesheet" type="text/css" />
+		
+		<!-- Template CSS -->
+    <link href="/files/686tees.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      .product-listing .title {
+        font-size: 16px;
+      }
+      .logo a {
+        background-image: url("/files/rehab_records_logo.png");
+        display: block;
+        width: 237px;
+        margin-top: -40px;
+        height: 120px;
+      }
+      .logo span {
+        display: none;
+      }
+    </style>
+    <!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
+	</head>
+<body>
+
+<div class="container">
+	
+	<!-- Site Top -->
+	<div class="row">
+		<div class="span12">
+			<ul class="top-nav">
+				<li><a href="login.html">Login</a></li>
+				<li><a href="register.html">Registration</a></li>
+				<li><a href="forgot.html">Lost your password?</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /Site top -->
+	
+	<!-- Header -->
+	<div class="row">
+	
+		<div class="span4">
+			<p class="logo">
+        <a href="/"><span class="entypo heart"></span>&nbsp;<span>{{ store | html_encode }}</span></a>
+			</p>
+		</div>
+	
+		<div class="span4">
+      <!-- #IF {{ snippets.tagline }} -->
+			<p class="strapline">
+        {{ snippets.tagline | strip_html }}<br />
+        <span>{{ snippets.address | strip_html }}</span>
+      </p>
+      <!-- #ENDIF -->
+		</div>
+	
+		<div class="span4">
+			<div class="row">
+				<div class="span2 offset2 mini-basket">
+					<p class="mini-basket-title"><a href="/cart"><span class="entypo cart"></span> Cart</a></p>
+					<div class="row">
+						<div class="span1">
+							<p class="mini-basket-summary">
+								Price<br />
+                <span>{{ cart.totalprice | money }}</span>
+							</p>
+						</div>
+						<div class="span1">
+							<p class="mini-basket-summary">
+								Items<br />
+                <span>{{ cart.items.count }}</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Menu -->
+	<div class="row">
+		<div class="span12">
+			<ul class="main-nav clearfix">
+		        <!-- #FOREACH {{link in links.nav}} -->
+		        <li class="nav-{{link.slug}}"><a href="{{link.url}}" title="{{link.name | html_encode}}">{{link.name | html_encode}}</a></li>
+		        <!-- #NEXT -->
+			</ul>
+		</div>
+	</div>
+
+	<!-- #IF {{page.hasmessage}} -->
+    <section class="pagemsg" id="pagemsg">
+        <div class="msg {{page.messagetype|lowercase}}">                
+            <div class="details">
+            	<!-- #IF {{page.hasmessagetitle}} --><h3>{{page.messagetitle}}</h3><!-- #ENDIF -->
+            	<!-- #IF {{page.hasmessagedetails}} --><p>{{page.messagedetails}}</p><!-- #ENDIF -->
+            </div>
+            <div class="buttons">
+                <a href="#" class="close" onClick="$('#pagemsg').fadeOut();" title="Click to Close" rel="nofollow">Close</a>
+            </div>
+        </div>
+    </section>
+    <!-- #ENDIF --> 
+
+  	<!-- #BLOCK name="content_area" --><!-- #ENDBLOCK -->
+		
+	<div class="row footer">
+		<div class="span6">
+			<ul class="footer-nav">
+				<li><a href="/pages/terms">Terms &amp; Conditions</a></li>
+				<li><a href="/pages/delivery">Delivery Information</a></li>
+				<li><a href="/contact">Contact</a></li>
+			</ul>
+		</div>
+		<div class="span6 footer-right">
+      <p>&copy; {{ store | html_encode }} {{ now.year }} <a class="brag" href="http://www.cartching.com">online store powered by Cartching</a></p>
+		</div>
+	</div>
+	
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/files/bootstrap.min.js"></script>
+
+</body>
+</html>

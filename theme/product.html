@@ -1,0 +1,138 @@
+<!-- #EXTENDS file="theme.html" -->
+
+<!-- #BLOCK for="content_area" -->
+
+	<!-- Body -->
+	<div class="row">
+		<div class="span12">
+			<h1><a href="{{product.url}}">{{product.name}}</h1>
+		</div>
+	</div>
+
+	<!-- Product Detail -->
+	<div class="row">
+	
+		<div class="span8">
+		
+			<img class="product-image" src="{{product.image}}?w=800&h=625&crop=false" alt="{{product.name | html_encode}}" />
+			
+			<div class="row">
+				<!-- #FOREACH {{image in product.images}} -->
+				<div class="span2">
+					<a href="{{image.url}}?w=1024&h=1024&crop=false">
+						<img class="product-thumb" src="{{image.url}}?w=172&h=135&crop=true" alt="{{image.name | html_encode}}" />
+					</a>
+				</div>
+                <!-- #NEXT -->
+			</div>
+			
+		</div>
+		
+		<div class="span4">
+		
+			<form action="/cart/add" method="post">
+				<input type="hidden" name="product" value="{{product.id}}">
+
+				<div class="add-basket-box clearfix">
+					<img src="{{product.image}}?w=60&h=47&crop=true" alt="{{product.name | html_encode}}" />
+					<p><!-- {{product.name | html_encode}}<br />--><span>{{product.price | money }}</span></p>
+					<button class="btn btn-addcart btn-primary"><span class="entypo cart"></span></button>
+				</div>
+				
+				<div>{{product.details}}</div>
+
+				<!-- #IF {{product.disabled}} -->
+	                <h5>This product can't be purchased online.</h5>
+	                <p>Please <a href="/contact/">email</a> us if you're interested in this product.</p>
+	            <!-- #ELSE -->
+					<!-- #IF {{product.variations}} -->
+						<ul>
+							<!-- #FOREACH {{variation in product.variations}} -->
+		                    <li class="variations">
+		                        <select name="variation" class="select">
+		                            <!-- #FOREACH {{option in variation.options}} -->
+		                               <option value="{{option.id}}">{{option | html_encode}}</option>
+		                            <!-- #NEXT -->
+		                        </select>
+		                        
+		                    </li>
+		                    <!-- #NEXT -->
+		                 </ul>
+					<!-- #ELSEIF {{product.variation}} -->
+						<!-- #FOREACH {{option in product.variation.options}} -->
+		                    <label class="checkbox  {{ option.soldout | if('soldout','instock') }}">
+			                    <input name="variation" type="radio" value="{{option.id}}" class="radio" {{ option.soldout | if ('disabled','') }} />
+			                    <span>{{option | html_encode}}</span>
+			                    <!-- #IF {{ option.soldout }} -->
+		                        <span class="stocklevel soldout">Sold Out</span>
+		                    	<!-- #ENDIF -->
+		                    </label>
+		                <!-- #NEXT -->
+					<!-- #ENDIF -->
+					<button type="submit" class="btn btn-primary">Add to Cart</button>
+				<!-- #ENDIF -->
+
+			</form>
+
+		</div>
+	
+	</div>
+	
+	<!-- Related Products -->
+	
+	<div class="row">
+		
+		<div class="span12">
+		
+			<h2>Related Products</h2>
+		
+		</div>
+		
+	</div>
+
+	<!-- Product Listing -->
+	
+	<div class="row">
+		
+		<div class="span4 product-listing">
+		
+			<p class="title"><a href="product.html">A Life Style</a></p>
+			
+			<a href="product.html"><img class="image" src="assets/img/product-4.jpg" alt="A Life Style" /></a>
+			
+			<p class="price">
+				&pound; 9.99
+				<a class="btn btn-addcart btn-primary" href="basket.html"><span class="entypo cart"></span></a><a class="btn btn-view btn-grey" href="product.html"><span class="entypo search"></span></a>
+			</p>
+			
+		</div>
+		
+		<div class="span4 product-listing">
+		
+			<p class="title"><a href="product.html">Amnesia Community</a></p>
+			
+			<a href="product.html"><img class="image" src="assets/img/product-5.jpg" alt="Amnesia Community" /></a>
+			
+			<p class="price">
+				&pound; 9.99
+				<a class="btn btn-addcart btn-primary" href="basket.html"><span class="entypo cart"></span></a><a class="btn btn-view btn-grey" href="product.html"><span class="entypo search"></span></a>
+			</p>
+			
+		</div>
+		
+		<div class="span4 product-listing">
+		
+			<p class="title"><a href="product.html">Carnal</a></p>
+			
+			<a href="product.html"><img class="image" src="assets/img/product-6.jpg" alt="Carnal" /></a>
+			
+			<p class="price">
+				&pound; 9.99
+				<a class="btn btn-addcart btn-primary" href="basket.html"><span class="entypo cart"></span></a><a class="btn btn-view btn-grey" href="product.html"><span class="entypo search"></span></a>
+			</p>
+			
+		</div>
+		
+	</div>
+
+<!-- #ENDBLOCK -->
